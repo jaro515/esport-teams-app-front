@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@my-app/auth": ["libs/auth/src/index.ts"],
       "@my-app/menu": ["libs/shared/src/lib/ui/src/index.ts"],
+      "@my-app/registration": ["libs/registration/src/index.ts"],
       "@my-app/shared": ["libs/shared/src/index.ts"]
     }
   },

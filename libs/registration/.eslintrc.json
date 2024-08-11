@@ -9,12 +9,11 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "@typescript-eslint/no-inferrable-types": "off",
         "@angular-eslint/directive-selector": [
           "error",
           {
             "type": "attribute",
-            "prefix": "app",
+            "prefix": "lib",
             "style": "camelCase"
           }
         ],
@@ -22,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "app",
+            "prefix": "lib",
             "style": "kebab-case"
           }
         ]

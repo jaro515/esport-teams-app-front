@@ -1,33 +1,39 @@
-<mat-sidenav-container>
+<mat-sidenav-container class="sidenav-container">
   <mat-sidenav
     #drawer
-    class="w-52"
+    class="sidenav"
     fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
   >
-    <mat-toolbar> Menu </mat-toolbar>
+    <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <lib-menu [menuItems]="menuItems"> </lib-menu>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="flex justify-between">
-      @if(isHandset$ | async){
+      @if (isHandset$ | async) {
       <button
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
       >
-        <mat-icon aria-label="Side nav toggle icon">Menu</mat-icon>
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       }
-      <span>My-app</span>
+      <span>my-app</span>
+      <div class="flex gap-2 text-base">
+        @if (isUserLoggedIn) {
+        <span>Witaj {{ (loggedUser$ | async)?.name }}</span>
+        <button (click)="onLogout()">Wyloguj</button>
+        } @else {
+        <button routerLink="auth">Logowanie</button>
+        <button routerLink="registration">Rejestracja</button> }
+      </div>
     </mat-toolbar>
-    <div>
-      <router-outlet></router-outlet>
-    </div>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

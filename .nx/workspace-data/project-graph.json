@@ -52,6 +52,58 @@
         "implicitDependencies": []
       }
     },
+    "registration": {
+      "name": "registration",
+      "type": "lib",
+      "data": {
+        "root": "libs/registration",
+        "targets": {
+          "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {},
+            "configurations": {},
+            "parallelism": true,
+            "cache": true,
+            "inputs": [
+              "default",
+              "{workspaceRoot}/.eslintrc.json",
+              "{workspaceRoot}/.eslintignore",
+              "{workspaceRoot}/eslint.config.js"
+            ]
+          },
+          "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": [
+              "{workspaceRoot}/coverage/{projectRoot}"
+            ],
+            "options": {
+              "jestConfig": "libs/registration/jest.config.ts",
+              "passWithNoTests": true
+            },
+            "configurations": {
+              "ci": {
+                "ci": true,
+                "codeCoverage": true
+              }
+            },
+            "parallelism": true,
+            "cache": true,
+            "inputs": [
+              "default",
+              "^production",
+              "{workspaceRoot}/jest.preset.js"
+            ]
+          }
+        },
+        "name": "registration",
+        "$schema": "../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "libs/registration/src",
+        "prefix": "lib",
+        "projectType": "library",
+        "tags": [],
+        "implicitDependencies": []
+      }
+    },
     "my-app-e2e": {
       "name": "my-app-e2e",
       "type": "e2e",
@@ -451,6 +503,58 @@
         "name": "shared",
         "$schema": "../../node_modules/nx/schemas/project-schema.json",
         "sourceRoot": "libs/shared/src",
+        "prefix": "lib",
+        "projectType": "library",
+        "tags": [],
+        "implicitDependencies": []
+      }
+    },
+    "auth": {
+      "name": "auth",
+      "type": "lib",
+      "data": {
+        "root": "libs/auth",
+        "targets": {
+          "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {},
+            "configurations": {},
+            "parallelism": true,
+            "cache": true,
+            "inputs": [
+              "default",
+              "{workspaceRoot}/.eslintrc.json",
+              "{workspaceRoot}/.eslintignore",
+              "{workspaceRoot}/eslint.config.js"
+            ]
+          },
+          "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": [
+              "{workspaceRoot}/coverage/{projectRoot}"
+            ],
+            "options": {
+              "jestConfig": "libs/auth/jest.config.ts",
+              "passWithNoTests": true
+            },
+            "configurations": {
+              "ci": {
+                "ci": true,
+                "codeCoverage": true
+              }
+            },
+            "parallelism": true,
+            "cache": true,
+            "inputs": [
+              "default",
+              "^production",
+              "{workspaceRoot}/jest.preset.js"
+            ]
+          }
+        },
+        "name": "auth",
+        "$schema": "../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "libs/auth/src",
         "prefix": "lib",
         "projectType": "library",
         "tags": [],
@@ -10674,6 +10778,15 @@
         "hash": "sha512-JmqCvUhmt43madlpFzG4BQzG2Z3m6tvQDNKdClZnO3VbIudJYmxsT0FNJMeiB2+JTSlTQTSbU8QdesVmwJcmLg=="
       }
     },
+    "npm:material-design-icons": {
+      "type": "npm",
+      "name": "npm:material-design-icons",
+      "data": {
+        "version": "3.0.1",
+        "packageName": "material-design-icons",
+        "hash": "sha512-t19Z+QZBwSZulxptEu05kIm+UyfIdJY1JDwI+nx02j269m6W414whiQz9qfvQIiLrdx71RQv+T48nHhuQXOCIQ=="
+      }
+    },
     "npm:media-typer": {
       "type": "npm",
       "name": "npm:media-typer",
@@ -13740,6 +13853,23 @@
         "type": "static"
       }
     ],
+    "registration": [
+      {
+        "source": "registration",
+        "target": "npm:@angular/core",
+        "type": "static"
+      },
+      {
+        "source": "registration",
+        "target": "npm:@angular/common",
+        "type": "static"
+      },
+      {
+        "source": "registration",
+        "target": "npm:jest-preset-angular",
+        "type": "static"
+      }
+    ],
     "my-app-e2e": [
       {
         "source": "my-app-e2e",
@@ -13780,12 +13910,17 @@
       },
       {
         "source": "my-app",
-        "target": "npm:@angular/cdk",
-        "type": "static"
+        "target": "auth",
+        "type": "dynamic"
       },
       {
         "source": "my-app",
-        "target": "npm:rxjs",
+        "target": "registration",
+        "type": "dynamic"
+      },
+      {
+        "source": "my-app",
+        "target": "npm:@angular/cdk",
         "type": "static"
       },
       {
@@ -13795,12 +13930,17 @@
       },
       {
         "source": "my-app",
-        "target": "shared",
+        "target": "npm:rxjs",
         "type": "static"
       },
       {
         "source": "my-app",
         "target": "menu",
+        "type": "static"
+      },
+      {
+        "source": "my-app",
+        "target": "shared",
         "type": "static"
       },
       {
@@ -13817,6 +13957,23 @@
     "shared": [
       {
         "source": "shared",
+        "target": "npm:jest-preset-angular",
+        "type": "static"
+      }
+    ],
+    "auth": [
+      {
+        "source": "auth",
+        "target": "npm:@angular/core",
+        "type": "static"
+      },
+      {
+        "source": "auth",
+        "target": "npm:@angular/common",
+        "type": "static"
+      },
+      {
+        "source": "auth",
         "target": "npm:jest-preset-angular",
         "type": "static"
       }

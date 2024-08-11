@@ -10215,6 +10215,15 @@
         "hash": "sha512-JmqCvUhmt43madlpFzG4BQzG2Z3m6tvQDNKdClZnO3VbIudJYmxsT0FNJMeiB2+JTSlTQTSbU8QdesVmwJcmLg=="
       }
     },
+    "npm:material-design-icons": {
+      "type": "npm",
+      "name": "npm:material-design-icons",
+      "data": {
+        "version": "3.0.1",
+        "packageName": "material-design-icons",
+        "hash": "sha512-t19Z+QZBwSZulxptEu05kIm+UyfIdJY1JDwI+nx02j269m6W414whiQz9qfvQIiLrdx71RQv+T48nHhuQXOCIQ=="
+      }
+    },
     "npm:media-typer": {
       "type": "npm",
       "name": "npm:media-typer",
