@@ -1,5 +1,57 @@
 {
   "nodes": {
+    "menu": {
+      "name": "menu",
+      "type": "lib",
+      "data": {
+        "root": "libs/shared/src/lib/ui",
+        "targets": {
+          "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {},
+            "configurations": {},
+            "parallelism": true,
+            "cache": true,
+            "inputs": [
+              "default",
+              "{workspaceRoot}/.eslintrc.json",
+              "{workspaceRoot}/.eslintignore",
+              "{workspaceRoot}/eslint.config.js"
+            ]
+          },
+          "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": [
+              "{workspaceRoot}/coverage/{projectRoot}"
+            ],
+            "options": {
+              "jestConfig": "libs/shared/src/lib/ui/jest.config.ts",
+              "passWithNoTests": true
+            },
+            "configurations": {
+              "ci": {
+                "ci": true,
+                "codeCoverage": true
+              }
+            },
+            "parallelism": true,
+            "cache": true,
+            "inputs": [
+              "default",
+              "^production",
+              "{workspaceRoot}/jest.preset.js"
+            ]
+          }
+        },
+        "name": "menu",
+        "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "libs/shared/src/lib/ui/src",
+        "prefix": "lib",
+        "projectType": "library",
+        "tags": [],
+        "implicitDependencies": []
+      }
+    },
     "my-app-e2e": {
       "name": "my-app-e2e",
       "type": "e2e",
@@ -239,9 +291,7 @@
               "outputPath": "dist/apps/my-app",
               "index": "apps/my-app/src/index.html",
               "browser": "apps/my-app/src/main.ts",
-              "polyfills": [
-                "zone.js"
-              ],
+              "polyfills": [],
               "tsConfig": "apps/my-app/tsconfig.app.json",
               "inlineStyleLanguage": "scss",
               "assets": [
@@ -354,6 +404,58 @@
         "tags": [],
         "implicitDependencies": []
       }
+    },
+    "shared": {
+      "name": "shared",
+      "type": "lib",
+      "data": {
+        "root": "libs/shared",
+        "targets": {
+          "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {},
+            "configurations": {},
+            "parallelism": true,
+            "cache": true,
+            "inputs": [
+              "default",
+              "{workspaceRoot}/.eslintrc.json",
+              "{workspaceRoot}/.eslintignore",
+              "{workspaceRoot}/eslint.config.js"
+            ]
+          },
+          "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": [
+              "{workspaceRoot}/coverage/{projectRoot}"
+            ],
+            "options": {
+              "jestConfig": "libs/shared/jest.config.ts",
+              "passWithNoTests": true
+            },
+            "configurations": {
+              "ci": {
+                "ci": true,
+                "codeCoverage": true
+              }
+            },
+            "parallelism": true,
+            "cache": true,
+            "inputs": [
+              "default",
+              "^production",
+              "{workspaceRoot}/jest.preset.js"
+            ]
+          }
+        },
+        "name": "shared",
+        "$schema": "../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "libs/shared/src",
+        "prefix": "lib",
+        "projectType": "library",
+        "tags": [],
+        "implicitDependencies": []
+      }
     }
   },
   "externalNodes": {
@@ -364,6 +466,15 @@
         "version": "4.4.0",
         "packageName": "@adobe/css-tools",
         "hash": "sha512-Ff9+ksdQQB3rMncgqDK78uLznstjyfIf2Arnh22pW8kBpLs6rpKDwgnZT46hin5Hl1WzazzK64DOrhSwYpS7bQ=="
+      }
+    },
+    "npm:@alloc/quick-lru": {
+      "type": "npm",
+      "name": "npm:@alloc/quick-lru",
+      "data": {
+        "version": "5.2.0",
+        "packageName": "@alloc/quick-lru",
+        "hash": "sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw=="
       }
     },
     "npm:@ampproject/remapping": {
@@ -607,6 +718,15 @@
         "version": "6.2.1",
         "packageName": "commander",
         "hash": "sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA=="
+      }
+    },
+    "npm:commander@4.1.1": {
+      "type": "npm",
+      "name": "npm:commander@4.1.1",
+      "data": {
+        "version": "4.1.1",
+        "packageName": "commander",
+        "hash": "sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA=="
       }
     },
     "npm:copy-webpack-plugin@12.0.2": {
@@ -4389,15 +4509,6 @@
         "hash": "sha512-SEP5kJpfGYqYKpBrj5XU3ahw5p5GOHJ0U5ssOSQ/WBVdwkD2Dzlce95exQTs3jOVWPPKLBN2rlEWkCK7dSmLvg=="
       }
     },
-    "npm:babel-plugin-macros": {
-      "type": "npm",
-      "name": "npm:babel-plugin-macros",
-      "data": {
-        "version": "3.1.0",
-        "packageName": "babel-plugin-macros",
-        "hash": "sha512-Cg7TFGpIr01vOQNODXOOaGz2NpCU5gl8x1qJFbb6hbZxR7XrcE2vtbAsTAbJ7/xwJtUuJEw8K8Zr/AE0LHlesg=="
-      }
-    },
     "npm:fs-extra@11.2.0": {
       "type": "npm",
       "name": "npm:fs-extra@11.2.0",
@@ -6081,6 +6192,15 @@
         "hash": "sha512-58S9QDqG0Xx27YwPSt9fJxivjYl432YCwfDMfZ+71RAqUrZef7LrKQZ3LHLOwCS4FLNBplP533Zx895SeOCHvA=="
       }
     },
+    "npm:arg@5.0.2": {
+      "type": "npm",
+      "name": "npm:arg@5.0.2",
+      "data": {
+        "version": "5.0.2",
+        "packageName": "arg",
+        "hash": "sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg=="
+      }
+    },
     "npm:argparse": {
       "type": "npm",
       "name": "npm:argparse",
@@ -6835,6 +6955,15 @@
         "version": "6.3.0",
         "packageName": "camelcase",
         "hash": "sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA=="
+      }
+    },
+    "npm:camelcase-css": {
+      "type": "npm",
+      "name": "npm:camelcase-css",
+      "data": {
+        "version": "2.0.1",
+        "packageName": "camelcase-css",
+        "hash": "sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA=="
       }
     },
     "npm:caniuse-api": {
@@ -7800,6 +7929,15 @@
         "hash": "sha512-CmnVc+Hek2egPx1PeTFVta2W78xy2K/9Rkf6cC4T59S50tVnzKj+tnx5mmx5lwvCkujZ4uRrpRSuV+IVs3f90Q=="
       }
     },
+    "npm:didyoumean": {
+      "type": "npm",
+      "name": "npm:didyoumean",
+      "data": {
+        "version": "1.2.2",
+        "packageName": "didyoumean",
+        "hash": "sha512-gxtyfqMg7GKyhQmb056K7M3xszy/myH8w+B4RT+QXBQsvAOdc3XymqDDPHx1BgPgsdAA5SIifona89YtRATDzw=="
+      }
+    },
     "npm:diff": {
       "type": "npm",
       "name": "npm:diff",
@@ -7825,6 +7963,15 @@
         "version": "3.0.1",
         "packageName": "dir-glob",
         "hash": "sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA=="
+      }
+    },
+    "npm:dlv": {
+      "type": "npm",
+      "name": "npm:dlv",
+      "data": {
+        "version": "1.1.3",
+        "packageName": "dlv",
+        "hash": "sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA=="
       }
     },
     "npm:dns-packet": {
@@ -10302,6 +10449,15 @@
         "hash": "sha512-eop+wDAvpItUys0FWkHIKeC9ybYrTGbU41U5K7+bttZZeohvnY7M9dZ5kB21GNWiFT2q1OoPTvncPCgSOVO5ow=="
       }
     },
+    "npm:lilconfig@2.1.0": {
+      "type": "npm",
+      "name": "npm:lilconfig@2.1.0",
+      "data": {
+        "version": "2.1.0",
+        "packageName": "lilconfig",
+        "hash": "sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ=="
+      }
+    },
     "npm:lines-and-columns": {
       "type": "npm",
       "name": "npm:lines-and-columns",
@@ -10797,6 +10953,15 @@
         "hash": "sha512-avsJQhyd+680gKXyG/sQc0nXaC6rBkPOfyHYcFb9+hdkqQkR9bdnkJ0AMZhke0oesPqIO+mFFJ+IdBc7mst4IA=="
       }
     },
+    "npm:mz": {
+      "type": "npm",
+      "name": "npm:mz",
+      "data": {
+        "version": "2.7.0",
+        "packageName": "mz",
+        "hash": "sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q=="
+      }
+    },
     "npm:nanoid": {
       "type": "npm",
       "name": "npm:nanoid",
@@ -11056,6 +11221,24 @@
         "version": "19.5.7",
         "packageName": "nx",
         "hash": "sha512-AUmGgE19NB4m/7oHYQVdzZHtclVevD8w0/nNzzjDJE823T8oeoNhmc9MfCLz+/2l2KOp+Wqm+8LiG9/xWpXk0g=="
+      }
+    },
+    "npm:object-assign": {
+      "type": "npm",
+      "name": "npm:object-assign",
+      "data": {
+        "version": "4.1.1",
+        "packageName": "object-assign",
+        "hash": "sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg=="
+      }
+    },
+    "npm:object-hash": {
+      "type": "npm",
+      "name": "npm:object-hash",
+      "data": {
+        "version": "3.0.0",
+        "packageName": "object-hash",
+        "hash": "sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw=="
       }
     },
     "npm:object-inspect": {
@@ -11427,6 +11610,51 @@
         "hash": "sha512-flwI+Vgm4SElObFVPpTIT7SU7R3qk2L7PyduMcokiaVKuWv9d/U+Gm/QAd8NDLuykTWTkcrjOeD2Pp1rMeBTGw=="
       }
     },
+    "npm:postcss-import@15.1.0": {
+      "type": "npm",
+      "name": "npm:postcss-import@15.1.0",
+      "data": {
+        "version": "15.1.0",
+        "packageName": "postcss-import",
+        "hash": "sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew=="
+      }
+    },
+    "npm:postcss-js": {
+      "type": "npm",
+      "name": "npm:postcss-js",
+      "data": {
+        "version": "4.0.1",
+        "packageName": "postcss-js",
+        "hash": "sha512-dDLF8pEO191hJMtlHFPRa8xsizHaM82MLfNkUHdUtVEV3tgTp5oj+8qbEqYM57SLfc74KSbw//4SeJma2LRVIw=="
+      }
+    },
+    "npm:postcss-load-config": {
+      "type": "npm",
+      "name": "npm:postcss-load-config",
+      "data": {
+        "version": "4.0.2",
+        "packageName": "postcss-load-config",
+        "hash": "sha512-bSVhyJGL00wMVoPUzAVAnbEoWyqRxkjv64tUl427SKnPrENtq6hJwUojroMz2VB+Q1edmi4IfrAPpami5VVgMQ=="
+      }
+    },
+    "npm:yaml@2.5.0": {
+      "type": "npm",
+      "name": "npm:yaml@2.5.0",
+      "data": {
+        "version": "2.5.0",
+        "packageName": "yaml",
+        "hash": "sha512-2wWLbGbYDiSqqIKoPjar3MPgB94ErzCtrNE1FdqGuaO0pi2JGjmE8aW8TDZwzU7vuxcGRdL/4gPQwQ7hD5AMSw=="
+      }
+    },
+    "npm:yaml": {
+      "type": "npm",
+      "name": "npm:yaml",
+      "data": {
+        "version": "1.10.2",
+        "packageName": "yaml",
+        "hash": "sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg=="
+      }
+    },
     "npm:postcss-media-query-parser": {
       "type": "npm",
       "name": "npm:postcss-media-query-parser",
@@ -11524,6 +11752,15 @@
         "version": "4.0.0",
         "packageName": "postcss-modules-values",
         "hash": "sha512-RDxHkAiEGI78gS2ofyvCsu7iycRv7oqw5xMWn9iMoR0N/7mf9D50ecQqUo5BZ9Zh2vH4bCUR/ktCqbB9m8vJjQ=="
+      }
+    },
+    "npm:postcss-nested": {
+      "type": "npm",
+      "name": "npm:postcss-nested",
+      "data": {
+        "version": "6.2.0",
+        "packageName": "postcss-nested",
+        "hash": "sha512-HQbt28KulC5AJzG+cZtj9kvKB93CFCdLvog1WFLf1D+xmMvPGlBstkpTEZfK5+AN9hfJocyBFCNiqyS48bpgzQ=="
       }
     },
     "npm:postcss-normalize-charset": {
@@ -12579,6 +12816,15 @@
         "hash": "sha512-TY0SKwiY7D2kMd3UxaWKSf3xHF0FFN/FAfsSqfrhxRT/koXTwffq2cgEWDkLQz7VojMu7qEEHt5TlMjkPx9UDw=="
       }
     },
+    "npm:sucrase": {
+      "type": "npm",
+      "name": "npm:sucrase",
+      "data": {
+        "version": "3.35.0",
+        "packageName": "sucrase",
+        "hash": "sha512-8EbVDiu9iN/nESwxeSxDKe0dunta1GOlHufmSSXxMD2z2/tMZpDMpvXQGsc+ajGo8y2uYUmixaSRUc/QPoQ0GA=="
+      }
+    },
     "npm:supports-preserve-symlinks-flag": {
       "type": "npm",
       "name": "npm:supports-preserve-symlinks-flag",
@@ -12613,6 +12859,15 @@
         "version": "3.2.4",
         "packageName": "symbol-tree",
         "hash": "sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw=="
+      }
+    },
+    "npm:tailwindcss": {
+      "type": "npm",
+      "name": "npm:tailwindcss",
+      "data": {
+        "version": "3.4.9",
+        "packageName": "tailwindcss",
+        "hash": "sha512-1SEOvRr6sSdV5IDf9iC+NU4dhwdqzF4zKKq3sAbasUWHEM6lsMhX+eNN5gkPx1BvLFEnZQEUFbXnGj8Qlp83Pg=="
       }
     },
     "npm:tapable": {
@@ -12667,6 +12922,24 @@
         "version": "0.2.0",
         "packageName": "text-table",
         "hash": "sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw=="
+      }
+    },
+    "npm:thenify": {
+      "type": "npm",
+      "name": "npm:thenify",
+      "data": {
+        "version": "3.3.1",
+        "packageName": "thenify",
+        "hash": "sha512-RVZSIV5IG10Hk3enotrhvz0T9em6cyHBLkH/YAZuKqd8hRkKhSfCGIcP2KUY0EPxndzANBmNllzWPwak+bheSw=="
+      }
+    },
+    "npm:thenify-all": {
+      "type": "npm",
+      "name": "npm:thenify-all",
+      "data": {
+        "version": "1.6.0",
+        "packageName": "thenify-all",
+        "hash": "sha512-RNxQH/qI8/t3thXJDwcstUO4zeqo64+Uy/+sNVRBx4Xn2OX+OZ9oP+iJnNFqplFra2ZUVeKCSa2oVWi3T4uVmA=="
       }
     },
     "npm:thingies": {
@@ -12784,6 +13057,15 @@
         "version": "1.3.0",
         "packageName": "ts-api-utils",
         "hash": "sha512-UQMIo7pb8WRomKR1/+MFVLTroIvDVtMX3K6OUir8ynLyzB8Jeriont2bTAtmNPa1ekAgN7YPDyf6V+ygrdU+eQ=="
+      }
+    },
+    "npm:ts-interface-checker": {
+      "type": "npm",
+      "name": "npm:ts-interface-checker",
+      "data": {
+        "version": "0.1.13",
+        "packageName": "ts-interface-checker",
+        "hash": "sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA=="
       }
     },
     "npm:ts-jest": {
@@ -13371,15 +13653,6 @@
         "hash": "sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA=="
       }
     },
-    "npm:yaml": {
-      "type": "npm",
-      "name": "npm:yaml",
-      "data": {
-        "version": "1.10.2",
-        "packageName": "yaml",
-        "hash": "sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg=="
-      }
-    },
     "npm:yargs": {
       "type": "npm",
       "name": "npm:yargs",
@@ -13445,6 +13718,28 @@
     }
   },
   "dependencies": {
+    "menu": [
+      {
+        "source": "menu",
+        "target": "npm:@angular/core",
+        "type": "static"
+      },
+      {
+        "source": "menu",
+        "target": "npm:@angular/router",
+        "type": "static"
+      },
+      {
+        "source": "menu",
+        "target": "shared",
+        "type": "static"
+      },
+      {
+        "source": "menu",
+        "target": "npm:jest-preset-angular",
+        "type": "static"
+      }
+    ],
     "my-app-e2e": [
       {
         "source": "my-app-e2e",
@@ -13485,6 +13780,43 @@
       },
       {
         "source": "my-app",
+        "target": "npm:@angular/cdk",
+        "type": "static"
+      },
+      {
+        "source": "my-app",
+        "target": "npm:rxjs",
+        "type": "static"
+      },
+      {
+        "source": "my-app",
+        "target": "npm:@angular/material",
+        "type": "static"
+      },
+      {
+        "source": "my-app",
+        "target": "shared",
+        "type": "static"
+      },
+      {
+        "source": "my-app",
+        "target": "menu",
+        "type": "static"
+      },
+      {
+        "source": "my-app",
+        "target": "npm:jest-preset-angular",
+        "type": "static"
+      },
+      {
+        "source": "my-app",
+        "target": "npm:@nx/angular",
+        "type": "static"
+      }
+    ],
+    "shared": [
+      {
+        "source": "shared",
         "target": "npm:jest-preset-angular",
         "type": "static"
       }
@@ -13527,6 +13859,11 @@
       {
         "source": "npm:@angular-devkit/build-angular",
         "target": "npm:jest-environment-jsdom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@angular-devkit/build-angular",
+        "target": "npm:tailwindcss",
         "type": "static"
       },
       {
@@ -15309,6 +15646,11 @@
       {
         "source": "npm:@angular/build",
         "target": "npm:postcss",
+        "type": "static"
+      },
+      {
+        "source": "npm:@angular/build",
+        "target": "npm:tailwindcss",
         "type": "static"
       },
       {
@@ -22925,23 +23267,6 @@
         "type": "static"
       }
     ],
-    "npm:babel-plugin-macros": [
-      {
-        "source": "npm:babel-plugin-macros",
-        "target": "npm:@babel/runtime",
-        "type": "static"
-      },
-      {
-        "source": "npm:babel-plugin-macros",
-        "target": "npm:cosmiconfig",
-        "type": "static"
-      },
-      {
-        "source": "npm:babel-plugin-macros",
-        "target": "npm:resolve",
-        "type": "static"
-      }
-    ],
     "npm:babel-plugin-polyfill-corejs2": [
       {
         "source": "npm:babel-plugin-polyfill-corejs2",
@@ -24581,13 +24906,6 @@
       {
         "source": "npm:debug",
         "target": "npm:ms",
-        "type": "static"
-      }
-    ],
-    "npm:dedent": [
-      {
-        "source": "npm:dedent",
-        "target": "npm:babel-plugin-macros",
         "type": "static"
       }
     ],
@@ -28879,6 +29197,23 @@
         "type": "static"
       }
     ],
+    "npm:mz": [
+      {
+        "source": "npm:mz",
+        "target": "npm:any-promise",
+        "type": "static"
+      },
+      {
+        "source": "npm:mz",
+        "target": "npm:object-assign",
+        "type": "static"
+      },
+      {
+        "source": "npm:mz",
+        "target": "npm:thenify-all",
+        "type": "static"
+      }
+    ],
     "npm:needle": [
       {
         "source": "npm:needle",
@@ -29829,6 +30164,40 @@
         "type": "static"
       }
     ],
+    "npm:postcss-js": [
+      {
+        "source": "npm:postcss-js",
+        "target": "npm:postcss",
+        "type": "static"
+      },
+      {
+        "source": "npm:postcss-js",
+        "target": "npm:camelcase-css",
+        "type": "static"
+      }
+    ],
+    "npm:postcss-load-config": [
+      {
+        "source": "npm:postcss-load-config",
+        "target": "npm:postcss",
+        "type": "static"
+      },
+      {
+        "source": "npm:postcss-load-config",
+        "target": "npm:ts-node",
+        "type": "static"
+      },
+      {
+        "source": "npm:postcss-load-config",
+        "target": "npm:lilconfig",
+        "type": "static"
+      },
+      {
+        "source": "npm:postcss-load-config",
+        "target": "npm:yaml@2.5.0",
+        "type": "static"
+      }
+    ],
     "npm:postcss-loader": [
       {
         "source": "npm:postcss-loader",
@@ -30018,6 +30387,18 @@
       {
         "source": "npm:postcss-modules-values",
         "target": "npm:icss-utils",
+        "type": "static"
+      }
+    ],
+    "npm:postcss-nested": [
+      {
+        "source": "npm:postcss-nested",
+        "target": "npm:postcss",
+        "type": "static"
+      },
+      {
+        "source": "npm:postcss-nested",
+        "target": "npm:postcss-selector-parser",
         "type": "static"
       }
     ],
@@ -31367,6 +31748,43 @@
         "type": "static"
       }
     ],
+    "npm:sucrase": [
+      {
+        "source": "npm:sucrase",
+        "target": "npm:@jridgewell/gen-mapping",
+        "type": "static"
+      },
+      {
+        "source": "npm:sucrase",
+        "target": "npm:commander@4.1.1",
+        "type": "static"
+      },
+      {
+        "source": "npm:sucrase",
+        "target": "npm:glob@10.4.5",
+        "type": "static"
+      },
+      {
+        "source": "npm:sucrase",
+        "target": "npm:lines-and-columns@1.2.4",
+        "type": "static"
+      },
+      {
+        "source": "npm:sucrase",
+        "target": "npm:mz",
+        "type": "static"
+      },
+      {
+        "source": "npm:sucrase",
+        "target": "npm:pirates",
+        "type": "static"
+      },
+      {
+        "source": "npm:sucrase",
+        "target": "npm:ts-interface-checker",
+        "type": "static"
+      }
+    ],
     "npm:supports-color": [
       {
         "source": "npm:supports-color",
@@ -31408,6 +31826,140 @@
       {
         "source": "npm:svgo",
         "target": "npm:picocolors",
+        "type": "static"
+      }
+    ],
+    "npm:tailwindcss": [
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:@alloc/quick-lru",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:arg@5.0.2",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:chokidar",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:didyoumean",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:dlv",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:fast-glob@3.3.2",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:glob-parent",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:is-glob",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:jiti",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:lilconfig@2.1.0",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:micromatch",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:normalize-path",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:object-hash",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:picocolors",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:postcss",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:postcss-import@15.1.0",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:postcss-js",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:postcss-load-config",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:postcss-nested",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:postcss-selector-parser",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:resolve",
+        "type": "static"
+      },
+      {
+        "source": "npm:tailwindcss",
+        "target": "npm:sucrase",
+        "type": "static"
+      }
+    ],
+    "npm:postcss-import@15.1.0": [
+      {
+        "source": "npm:postcss-import@15.1.0",
+        "target": "npm:postcss",
+        "type": "static"
+      },
+      {
+        "source": "npm:postcss-import@15.1.0",
+        "target": "npm:postcss-value-parser",
+        "type": "static"
+      },
+      {
+        "source": "npm:postcss-import@15.1.0",
+        "target": "npm:read-cache",
+        "type": "static"
+      },
+      {
+        "source": "npm:postcss-import@15.1.0",
+        "target": "npm:resolve",
         "type": "static"
       }
     ],
@@ -31562,6 +32114,20 @@
       {
         "source": "npm:test-exclude",
         "target": "npm:minimatch@3.1.2",
+        "type": "static"
+      }
+    ],
+    "npm:thenify": [
+      {
+        "source": "npm:thenify",
+        "target": "npm:any-promise",
+        "type": "static"
+      }
+    ],
+    "npm:thenify-all": [
+      {
+        "source": "npm:thenify-all",
+        "target": "npm:thenify",
         "type": "static"
       }
     ],
