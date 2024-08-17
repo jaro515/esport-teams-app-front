@@ -1,1 +1,33 @@
-<p>auth works!</p>
+<div class="flex flex-col justify-center items-center">
+  <form [formGroup]="authForm" class="flex flex-col gap-4 w-fit">
+    <mat-form-field>
+      <mat-label>Login</mat-label>
+      <input matInput type="text" name="login" #login formControlName="login" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Hasło</mat-label>
+      <input
+        matInput
+        [type]="hide() ? 'password' : 'text'"
+        formControlName="password"
+      />
+      <button
+        class="p-4"
+        mat-icon-button
+        matSuffix
+        (click)="hidePassword($event)"
+        [attr.aria-label]="'Ukryj'"
+        [attr.aria-pressed]="hide()"
+      >
+        <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+
+  <div class="flex flex-col items-center">
+    <p class="text-xl">Nie masz konta?</p>
+    <button class="w-fit" [routerLink]="['/registration']">
+      Zarejestruj się
+    </button>
+  </div>
+</div>

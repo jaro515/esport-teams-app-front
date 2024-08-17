@@ -1,11 +1,40 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'lib-auth',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    ReactiveFormsModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    RouterModule,
+  ],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss',
 })
-export class AuthComponent {}
+export class AuthComponent {
+  private readonly _formBuilder = inject(FormBuilder);
+
+  public hide: WritableSignal<boolean> = signal<boolean>(true);
+
+  public authForm: FormGroup = this._formBuilder.group({
+    login: [null, Validators.required],
+    password: [null, Validators.required],
+  });
+
+  public hidePassword(event: MouseEvent): void {
+    this.hide.set(!this.hide());
+    event.stopPropagation();
+  }
+}
