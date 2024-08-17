@@ -1,4 +1,4 @@
-<div class="flex flex-col justify-center items-center">
+<div class="flex flex-col justify-center items-center h-full gap-y-6">
   <form [formGroup]="authForm" class="flex flex-col gap-4 w-fit">
     <mat-form-field>
       <mat-label>Login</mat-label>
@@ -22,6 +22,7 @@
         <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
     </mat-form-field>
+    <button mat-button>Zaloguj się</button>
   </form>
 
   <div class="flex flex-col items-center">

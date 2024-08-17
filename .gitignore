@@ -5,6 +5,10 @@
 /integration/bazel/bazel-*
 *.log
 /node_modules/
+/.nx-cache
+/.nx
+/nx-dev/nx-dev/public/documentation
+/nx-dev/nx-dev/public/images/open-graph
 
 # CircleCI temporary file for cache key computation.
 # See `save_month_to_file` in `.circleci/config.yml`.
@@ -65,3 +69,7 @@ baseline.json
 aio/node_modules
 aio/out-tsc
 .angular
+
+# Ignore Nx files
+.nx/cache
+.nx/workspace-data

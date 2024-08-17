@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'lib-auth',
@@ -19,6 +20,7 @@ import { RouterModule } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     RouterModule,
+    MatButtonModule,
   ],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss',

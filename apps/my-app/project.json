@@ -23,7 +23,7 @@
           }
         ],
         "styles": [
-          "@angular/material/prebuilt-themes/magenta-violet.css",
+          "@angular/material/prebuilt-themes/cyan-orange.css",
           "apps/my-app/src/styles.scss"
         ],
         "scripts": []
